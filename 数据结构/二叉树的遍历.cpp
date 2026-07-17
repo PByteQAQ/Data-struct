@@ -1,44 +1,51 @@
-#include<stdio.h>
-#include<stdlib.h>
-typedef char Elemtype;
-//创建结点
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef char ElemType;
+
 typedef struct TreeNode
 {
-	Elemtype data;
-	TreeNode* lchild;
-	TreeNode* rchild;
-	
-};
+	ElemType data;
+	struct TreeNode* lchild;
+	struct TreeNode* rchild;
+}TreeNode;
+
 typedef TreeNode* BiTree;
+
 char str[] = "ABDH#K###E##CFI###G#J##";
 int idx = 0;
-//创建二叉树
-void createtree(BiTree *T) {
-	Elemtype ch;
+
+void createTree(BiTree* T)
+{
+	ElemType ch;
 	ch = str[idx++];
-	if (ch == 0) {
+	if (ch == '#')
+	{
 		*T = NULL;
 	}
-	else {
+	else
+	{
 		*T = (BiTree)malloc(sizeof(TreeNode));
 		(*T)->data = ch;
-		createtree(&(*T)->lchild);
-		createtree(&(*T)->rchild);
+		createTree(&(*T)->lchild);
+		createTree(&(*T)->rchild);
 
 	}
 }
-//前序遍历
-void preorder(BiTree T) {
-	if (T == NULL) {
+
+void preOrder(BiTree T)
+{
+	if (T == NULL)
+	{
 		return;
 	}
-	else {
-		printf("%c", T->data);
-		preorder(T->lchild);
-		preorder(T->rchild);
-	}
+
+	printf("%c ", T->data);
+	preOrder(T->lchild);
+	preOrder(T->rchild);
 }
-//中序遍历
+
+
 void inOrder(BiTree T)
 {
 	if (T == NULL)
@@ -50,7 +57,7 @@ void inOrder(BiTree T)
 	printf("%c ", T->data);
 	inOrder(T->rchild);
 }
-//后序遍历
+
 void postOrder(BiTree T)
 {
 	if (T == NULL)
@@ -66,7 +73,7 @@ void postOrder(BiTree T)
 int main(int argc, char const* argv[])
 {
 	BiTree T;
-	createtree(&T);
+	createTree(&T);
 	/*
 	preOrder(T);
 	printf("\n");
